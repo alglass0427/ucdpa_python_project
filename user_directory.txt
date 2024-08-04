@@ -1,0 +1,4 @@
+{"jdoe@example.com": {"name": "John Doe", "email": "jdoe@example.com","password":"abcd"},
+"asmith@example.com": {"name": "Alice Smith", "email": "asmith@example.com","password":"abcd"},
+"alwglass@gmail.com": {"name": "Alan Glass", "email": "alwglass@gmail.com","password":"password"}
+ }
