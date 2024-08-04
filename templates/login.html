@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Login - Coding for Kids{% endblock %}
+{% block content %}
+<h1>Login</h1>
+<form method="post" action="{{ url_for('login') }}">
+
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+        <label for="email">Email address</label>
+    </div>
+
+    <div class="form-floating">
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+        <label for="password">Password</label>
+    </div>
+
+    <br>
+    <button type="submit">Login</button>
+</form>
+{% endblock %}
