@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from functools import wraps
+from functions.functions import write_json_file
 import json
 
 app = Flask(__name__)
@@ -13,18 +14,14 @@ app.secret_key = 'your_secret_key'
 # print(f"User {users[2]['email']} , {users[2]['password']}")
 
 # Actual list of user
-
-# import json
-
 # Read the string from the .txt file
-with open('user_directory.txt', 'r') as file:
-    user_directory_str = file.read()
+# with open('user_directory.txt', 'r') as file:
+#     user_directory_str = file.read()
+# # Convert the JSON string back to a dictionary
+# users = json.loads(user_directory_str)
 
-# Convert the JSON string back to a dictionary
-users = json.loads(user_directory_str)
-
-# Print the dictionary to verify
-print(users["alwglass@gmail.com"]["password"])
+# # Print the dictionary to verify
+# print(users["alwglass@gmail.com"]["password"])
 
 
 # Login required decorator
@@ -58,6 +55,40 @@ def signup():
         username = request.form['name']
         email = request.form['email']
         password = request.form['password']
+        dob = request.form['dob']
+        gender = request.form['gender']
+        nested_dict = {}
+        new_dict = {}
+        nested_dict.update(name = username)
+        nested_dict.update(DOB = dob)
+        nested_dict.update(gender = gender)
+        nested_dict.update(email = email)
+        nested_dict.update(password = password)
+        new_dict[email] = nested_dict
+        print(new_dict)
+
+
+        with open('user_directory.txt', 'r') as file:
+            user_directory_str = file.read()
+            users = user_directory_str
+        # Convert the JSON string back to a dictionary
+        users = json.loads(user_directory_str)
+        print(users)
+        users.update(new_dict)
+        print(users)
+
+        with open('user_directory.txt', 'w') as file:
+            for key, value in users.items():
+                file.write(f'{key}: {value}\n')
+
+
+        # "jdoe@example.com": {"name": "John Doe","DOB": "10/10/1987", "gender": "Male","email": "jdoe@example.com","password":"abcd"}
+        # print(request.form)
+        # for x in request.form:
+        #     print(x)
+        #     # print(y)
+        #     for y in x:
+        #         print(y)
 
         # print(users[email]) 
         # if email in users and users[email]["password"] == password:
@@ -78,19 +109,32 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
-        print(users[email]) 
-        if email in users and users[email]["password"] == password:
-            session['logged_in'] = True
-            session['email'] = email
-            session['username'] = "A USER"
-            flash("Login successful", "success")
-            return redirect(url_for('dashboard'))
+        # Actual list of user
+        # Read the string from the .txt file
+        with open('user_directory.txt', 'r') as file:
+            user_directory_str = file.read()
+            users = user_directory_str
+        # Convert the JSON string back to a dictionary
+        users = json.loads(user_directory_str)
+        print(users)
+
+        # Print the dictionary to verify
+        print(users["alwglass@gmail.com"]["password"])
+        # print(users[email]) 
+        if email in users:
+            if users[email]["password"] == password:
+                session['logged_in'] = True
+                session['email'] = email
+                session['username'] = users[email]["name"]
+                flash("Login successful", "success")
+                return redirect(url_for('dashboard'))
         else:
             flash("Invalid credentials", "danger")
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
+    print(session)
     session.pop('logged_in', None)
     session.pop('email', None)
     flash("You have been logged out", "info")

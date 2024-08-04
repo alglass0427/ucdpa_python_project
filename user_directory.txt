@@ -1,4 +1,4 @@
-{"jdoe@example.com": {"name": "John Doe", "email": "jdoe@example.com","password":"abcd"},
-"asmith@example.com": {"name": "Alice Smith", "email": "asmith@example.com","password":"abcd"},
-"alwglass@gmail.com": {"name": "Alan Glass", "email": "alwglass@gmail.com","password":"password"}
- }
+jdoe@example.com: {'name': 'John Doe', 'DOB': '10/10/1987', 'gender': 'Male', 'email': 'jdoe@example.com', 'password': 'abcd'}
+asmith@example.com: {'name': 'Alice Smith', 'DOB': '10/10/1987', 'gender': 'Female', 'email': 'asmith@example.com', 'password': 'abcd'}
+alwglass@gmail.com: {'name': 'Alan Glass', 'DOB': '27/06/1986', 'gender': 'Male', 'email': 'alwglass@gmail.com', 'password': 'password'}
+ber@gmail.com: {'name': 'Bernadette Glass', 'DOB': '2024-08-01', 'gender': 'Female', 'email': 'ber@gmail.com', 'password': 'Holly'}

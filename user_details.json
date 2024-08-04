@@ -1,0 +1,4 @@
+{"jdoe@example.com": {"name": "John Doe","DOB": "10/10/1987", "gender": "Male","email": "jdoe@example.com","password":"abcd"},
+"asmith@example.com": {"name": "Alice Smith","DOB": "10/10/1987", "gender": "Female", "email": "asmith@example.com","password":"abcd"},
+"alwglass@gmail.com": {"name": "Alan Glass", "DOB": "27/06/1986", "gender": "Male","email": "alwglass@gmail.com","password":"password"}
+}
