@@ -1,10 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from functools import wraps
 import functions.functions as func    ###Functions file in functions folder to seperate functions from app.py
-import json
+# import json  #imported in the functions file
+from flask_wtf import FlaskForm
+from wtforms import StringField,SubmitField
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'mysecretkey'
 USER_DIRECTORY =  'user_directory.json'
 # Dummy user data
 
@@ -30,7 +32,7 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         rule = str(request.url_rule)
         print(f"route is {str(rule)}")
-        print(rule == "/")
+        print(rule == "/") 
         print(type(str(rule)))
         # print(session['email'])
         if rule ==  "/":
@@ -51,28 +53,25 @@ def index():
 # ----------------------
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # file_path = 'user_directory.json'
-    
-    
-    # print(f"Details for {email}: {user_details}")
+    #check if The user exists already
     if request.method == 'POST':
-
         username = request.form['name']
         email = request.form['email']
+        #does the email exist in get user details using the user directory global file location
         user_details = func.get_user_details(USER_DIRECTORY, email)
         print(f"Details for {email}: {user_details}")
+        #if the user does not exist then add to the JSON of users
         if user_details == "User does not exist.":
-            password = request.form['password']
-            dob = request.form['dob']
-            gender = request.form['gender']
+            # form_data = request.form.to_dict()
             nested_dict = {}
-            nested_dict.update(name = username)
-            nested_dict.update(DOB = dob)
-            nested_dict.update(gender = gender)
-            nested_dict.update(email = email)
-            nested_dict.update(password = password)
+            for item in request.form:
+                print(item)
+                print(request.form[item])
+                nested_dict[item] = request.form[item]
+
             print(nested_dict)
             func.add_user_to_json(USER_DIRECTORY,nested_dict)
+            return redirect(url_for('login'))
         else:
             flash("Email address already used -  Please Login", "warning")
      
@@ -86,23 +85,17 @@ def login():
         email = request.form['email']
         password = request.form['password']
         is_valid = func.check_credentials(USER_DIRECTORY, email, password)
-
-        print(is_valid)
-        # Actual list of user
-        # Read the string from the .txt file
-        # with open('user_directory.txt', 'r') as file:
-        # with open(file_path, 'r') as file:
-        #     users = json.load(file)
-
-        # Print the dictionary to verify
-        # print(users["user_data"][3])
-            #   ["ber@gmail.com"]["password"])
-        # ['alwglass@gmail.com']['password'])
-        # print(users[email]) 
-        if is_valid != False and is_valid != "User does not exist.":
+        
+        print(f"is valid returns {is_valid} and it is {type(is_valid)}")
+        is_valid.pop("password")
+        print(f"is valid returns {is_valid} and it is {type(is_valid)}")
+        #Check if the user exists and the password is valid
+        if is_valid != False and is_valid != "User does not exist.":  
             session['logged_in'] = True
             session['email'] = email
-            session['username'] = is_valid
+            session['username'] = is_valid["name"]
+            session['user_data'] = is_valid
+            # session['username'] = "Carter Glass"
             flash("Login successful", "success")
             return redirect(url_for('dashboard'))
         elif is_valid == "User does not exist.":
@@ -134,6 +127,31 @@ def lesson(lesson_id):
         "3": "Lesson 3 content goes here."
     }
     return render_template('lesson.html', lesson_content=lessons.get(lesson_id, "Lesson not found."))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.route('/validator')
+def validator():
+    lower_letter = False
+    upper_letter = False
+    num_end = False
+    username = request.args.get("username")
+
+    lower_letter = any(c.islower() for c in username) 
+    ##short hand for looping through user name
+    # for letter in username:
+    #     if letter.lower() == letter:
+    upper_letter = any(c.isupper() for c in username)
+    num_end =  username[-1].isdigit()
+
+    report = lower_letter and upper_letter and num_end
+
+    return render_template('validator.html', report = report , lower = lower_letter , upper = upper_letter, num_end = num_end)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

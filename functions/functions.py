@@ -1,5 +1,6 @@
 import json
 
+
 # Function to write JSON data to a file
 def write_json_file(file_path, data):
     with open(file_path, 'w') as file:
@@ -31,7 +32,8 @@ def check_credentials(file_path, email, password):
     for user in data["user_data"]:
         if user["email"] == email:
             if user["password"] == password:
-                return user["name"]
+                print(f"Printed from check creds -  {user}")
+                return user
             else:
                 return False
     return "User does not exist."
@@ -40,7 +42,12 @@ def check_credentials(file_path, email, password):
 def get_user_details(file_path, email):
     data = read_json_file(file_path)
     for user in data["user_data"]:
-        if user["email"] == email:
-            return user
+        try:
+            if user["email"] == email:
+                # print(user)
+                return user
+        except KeyError:
+            print("No Users Exist!!!")
+
     return "User does not exist."
 

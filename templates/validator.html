@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Home - Coding for Kids{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h2 class="display-6">Lets check the user name conditions!</h2>    
+        {% if report %}
+        <p class="lead">Your username had uppercase, lowercase and number at the end , Well Done!!</p>
+        {% else %}
+        <ul>
+            {% if not upper %}
+                <li>You did not use an <em>upper</em> case letter!</li>
+            {% endif %}
+
+            {% if not lower %}
+                <li>You did not use an <em>lower</em> case letter!</li>
+            {% endif %}
+
+            {% if not num_end %}
+                <li>You did not use a number at the end!</li>
+            {% endif %}
+        </ul>
+        {% endif %}
+</div>
+{% endblock %}

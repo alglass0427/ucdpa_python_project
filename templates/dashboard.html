@@ -4,6 +4,11 @@
 <h1>Dashboard</h1>
 <p>Welcome, {{ session.username }}</p>
 <div class="list-group">
+    {% if 1!=1  %}
+        <p>1 is = 1</p>
+    {% else %}
+        <p>1 is not 1</p>
+    {% endif %}
     <a href="{{ url_for('lesson', lesson_id=1) }}" class="list-group-item list-group-item-action">Lesson 1</a>
     <a href="{{ url_for('lesson', lesson_id=2) }}" class="list-group-item list-group-item-action">Lesson 2</a>
     <a href="{{ url_for('lesson', lesson_id=3) }}" class="list-group-item list-group-item-action">Lesson 3</a>

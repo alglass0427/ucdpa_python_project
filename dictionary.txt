@@ -1,3 +1,0 @@
-{"1":{"name": "John", "DOB": "10/10/1987", "gender": "Male","password":"password","email":"user@example.com"},
- "2":{"name": "Alan", "DOB": "27/06/1986", "gender": "Male","password":"password","email":"alwglass@gmail.com"}
-}

@@ -35,7 +35,22 @@
         <small></small>
     </div>
 
+    <div class="form-floating">
+        <input type="color" class="form-control" id="fav_color" placeholder="Pick a colour!" name="fav_color">
+        <label for="fav_color">Favourite  Colour</label>
+        <small></small>
+    </div>
+
     <br>
     <button type="submit">Submit</button>
+</form>   
+<br>
+<form id = "validate"  action="{{ url_for('validator') }}">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="username" placeholder="User Name" name="username" >
+        <label for="username">User Name</label>
+        <small></small>
+    </div>
+    <button type="submit">Validate</button>
 </form>
 {% endblock %}
