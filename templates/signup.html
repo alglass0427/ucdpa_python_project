@@ -2,32 +2,37 @@
 {% block title %}Sign Up - Coding for Kids{% endblock %}
 {% block content %}
 <h1>Sign Up</h1>
-<form method="post" action="{{ url_for('signup') }}">
+<form id = "signupForm" method="post" action="{{ url_for('signup') }}">
 
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" placeholder="Full Name" name="name">
+        <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" >
         <label for="name">Full Name</label>
+        <small></small>
     </div>
 
     <div class="form-floating mb-3">
         <input type="date" class="form-control" id="dob" name="dob">
         <label for="dob">Date of Birth</label>
+        <small></small>
     </div>
 
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="gender" name="gender">
         <label for="gebder">Gender</label>
+        <small></small>
     </div>
 
 
     <div class="form-floating mb-3">
         <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
         <label for="email">Email address</label>
+        <small></small>
     </div>
 
     <div class="form-floating">
         <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         <label for="password">Password</label>
+        <small></small>
     </div>
 
     <br>

@@ -1,0 +1,60 @@
+{
+    "user_data": [
+        {
+            "name": "John Doe",
+            "DOB": "10/10/1987",
+            "gender": "Male",
+            "email": "jdoe@example.com",
+            "password": "abcd"
+        },
+        {
+            "name": "Alice Smith",
+            "DOB": "10/10/1987",
+            "gender": "Female",
+            "email": "asmith@example.com",
+            "password": "abcd"
+        },
+        {
+            "name": "Alan Glass",
+            "DOB": "27/06/1986",
+            "gender": "Male",
+            "email": "alwglass@gmail.com",
+            "password": "password"
+        },
+        {
+            "name": "Bernadette Glass",
+            "DOB": "2024-08-01",
+            "gender": "Female",
+            "email": "ber@gmail.com",
+            "password": "Holly"
+        },
+        {
+            "name": "Heidi Glass",
+            "DOB": "2024-08-06",
+            "gender": "Female",
+            "email": "heidi@gmail.com",
+            "password": "Heidi"
+        },
+        {
+            "name": "Harper",
+            "DOB": "2013-11-01",
+            "gender": "Female",
+            "email": "",
+            "password": "Harper"
+        },
+        {
+            "name": "Holly",
+            "DOB": "2007-12-04",
+            "gender": "Female",
+            "email": "holly@gmail.com",
+            "password": "Holly#0414"
+        },
+        {
+            "name": "Carter Glass",
+            "DOB": "2019-11-27",
+            "gender": "Male",
+            "email": "carter@gmail.com",
+            "password": "Carter#040115"
+        }
+    ]
+}
