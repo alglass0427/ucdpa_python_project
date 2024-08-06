@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Sign Up - Coding for Kids{% endblock %}
+{% block content %}
+<h1>Sign Up</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.name.label}} {{ form.name(class="form-control") }}
+    <br>
+    {{ form.dob.label}} {{ form.dob(class="form-control")}}
+    <br>
+    {{ form.gender.label}} {{ form.gender}}
+    
+    {{ form.email.label}} {{ form.email(class="form-control") }}
+    <br>
+    {{ form.password.label}} {{ form.password(class="form-control") }}
+    <br>
+    {{ form.submit.label}} {{ form.submit(class="form-control") }}
+</form>
+{% endblock %}

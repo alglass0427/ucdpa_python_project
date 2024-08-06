@@ -3,28 +3,50 @@ from functools import wraps
 import functions.functions as func    ###Functions file in functions folder to seperate functions from app.py
 # import json  #imported in the functions file
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField
+from wtforms import StringField,SubmitField,PasswordField,DateField,RadioField
+from wtforms.validators import DataRequired,Email
+
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
 USER_DIRECTORY =  'user_directory.json'
-# Dummy user data
+
+# //////////////////////////////////////////////////////////
+class InfoForm(FlaskForm):
+
+    name = StringField("Full Name",validators=[DataRequired()])
+    dob = DateField("Date of Birth")
+    gender = RadioField("Gender",
+            choices=[("man","Male"),
+                     ("woman","Female"),
+                     ("none","Not Disclosed")
+                     ])
+    email = StringField("Email Address",validators=[DataRequired()])
+    password = PasswordField("Password")
+    # fav_color = ColorField("Fav Color")
+    submit = SubmitField("Submit")
 
 
-# users = {1: {'name': 'John', 'age': '10', 'gender': 'Male','password':'password','email':'user@example.com'},
-#          2: {'name': 'Alan', 'age': '38', 'gender': 'Male','password':'password','email':'alwglass@gmail.com'}}
-# print(f"User {users[2]['email']} , {users[2]['password']}")
+@app.route('/forms',methods = ['GET','POST'])
+def forms():
+    form = InfoForm() #Create instance of class
+    if form.validate_on_submit():
+        session['name'] = form.name.data
+        session['dob'] = form.dob.data
+        session['gender'] = form.gender.data
+        session['email'] = form.email.data
+        # session['fav_color'] = form.fav_color.data
+        
+        return redirect(url_for('thankyou'))
+    return render_template('forms.html',form = form)
 
-# Actual list of user
-# Read the string from the .txt file
-# with open('user_directory.txt', 'r') as file:
-#     user_directory_str = file.read()
-# # Convert the JSON string back to a dictionary
-# users = json.loads(user_directory_str)
+@app.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')
 
-# # Print the dictionary to verify
-# print(users["alwglass@gmail.com"]["password"])
 
+# //////////////////////////////////////////////////////////
+###Main App below
 
 # Login required decorator
 def login_required(f):
@@ -133,23 +155,32 @@ def lesson(lesson_id):
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+###practice For passing between templates
 @app.route('/validator')
 def validator():
     lower_letter = False
     upper_letter = False
     num_end = False
+    report = False
+    # try:
     username = request.args.get("username")
+    print(username)
+    if username != "":
+        lower_letter = any(c.islower() for c in username) 
+        ##short hand for looping through user name
+        # for letter in username:
+        #     if letter.lower() == letter:
+        upper_letter = any(c.isupper() for c in username)
+        num_end =  username[-1].isdigit()
 
-    lower_letter = any(c.islower() for c in username) 
-    ##short hand for looping through user name
-    # for letter in username:
-    #     if letter.lower() == letter:
-    upper_letter = any(c.isupper() for c in username)
-    num_end =  username[-1].isdigit()
-
-    report = lower_letter and upper_letter and num_end
+        report = lower_letter and upper_letter and num_end
 
     return render_template('validator.html', report = report , lower = lower_letter , upper = upper_letter, num_end = num_end)
+    # except TypeError:
+    #     print("No Users Exist!!!")
+
+
 
 
 
