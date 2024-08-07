@@ -4,16 +4,49 @@
 <h1>Sign Up</h1>
 <form method="post">
     {{ form.hidden_tag() }}
-    {{ form.name.label}} {{ form.name(class="form-control") }}
-    <br>
-    {{ form.dob.label}} {{ form.dob(class="form-control")}}
-    <br>
-    {{ form.gender.label}} {{ form.gender}}
     
-    {{ form.email.label}} {{ form.email(class="form-control") }}
+    <div class="form-floating mb-3">
+        {{ form.name(class="form-control") }}
+        {{ form.name.label}}
+    </div>
+
     <br>
-    {{ form.password.label}} {{ form.password(class="form-control") }}
+
+    <div class="form-floating mb-3">
+        {{ form.dob(class="form-control")}}
+        {{ form.dob.label}} 
+    </div>
+
     <br>
-    {{ form.submit.label}} {{ form.submit(class="form-control") }}
+
+    <div class="form-check form-check-inline">
+      
+        {{form.gender}} 
+        {{ form.gender.label}}
+
+    </div>
+
+    <br>
+
+    <div class="form-floating mb-3">
+        {{ form.email(class="form-control") }}
+        {{ form.email.label}} 
+    
+    </div>
+
+    <br>
+
+    <div class="form-floating mb-3">
+        {{ form.password(class="form-control") }}
+        {{ form.password.label}} 
+    </div>
+
+    <br>
+
+    <div class="form-floating mb-3">
+    {{ form.submit.label}} 
+    {{ form.submit (class="form-control btn btn-primary ") }}
+    </div>
+
 </form>
 {% endblock %}

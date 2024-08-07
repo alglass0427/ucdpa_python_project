@@ -2,50 +2,16 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from functools import wraps
 import functions.functions as func    ###Functions file in functions folder to seperate functions from app.py
 # import json  #imported in the functions file
-from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,PasswordField,DateField,RadioField
-from wtforms.validators import DataRequired,Email
+# from flask_wtf import FlaskForm
+# from wtforms import StringField,SubmitField,PasswordField,DateField,RadioField
+# from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
 USER_DIRECTORY =  'user_directory.json'
 
-# //////////////////////////////////////////////////////////
-class InfoForm(FlaskForm):
 
-    name = StringField("Full Name",validators=[DataRequired()])
-    dob = DateField("Date of Birth")
-    gender = RadioField("Gender",
-            choices=[("man","Male"),
-                     ("woman","Female"),
-                     ("none","Not Disclosed")
-                     ])
-    email = StringField("Email Address",validators=[DataRequired()])
-    password = PasswordField("Password")
-    # fav_color = ColorField("Fav Color")
-    submit = SubmitField("Submit")
-
-
-@app.route('/forms',methods = ['GET','POST'])
-def forms():
-    form = InfoForm() #Create instance of class
-    if form.validate_on_submit():
-        session['name'] = form.name.data
-        session['dob'] = form.dob.data
-        session['gender'] = form.gender.data
-        session['email'] = form.email.data
-        # session['fav_color'] = form.fav_color.data
-        
-        return redirect(url_for('thankyou'))
-    return render_template('forms.html',form = form)
-
-@app.route('/thankyou')
-def thankyou():
-    return render_template('thankyou.html')
-
-
-# //////////////////////////////////////////////////////////
 ###Main App below
 
 # Login required decorator
@@ -109,10 +75,11 @@ def login():
         is_valid = func.check_credentials(USER_DIRECTORY, email, password)
         
         print(f"is valid returns {is_valid} and it is {type(is_valid)}")
-        is_valid.pop("password")
+        # is_valid.pop("password")
         print(f"is valid returns {is_valid} and it is {type(is_valid)}")
         #Check if the user exists and the password is valid
-        if is_valid != False and is_valid != "User does not exist.":  
+        if is_valid != False and is_valid != "User does not exist.":
+            is_valid.pop("password")
             session['logged_in'] = True
             session['email'] = email
             session['username'] = is_valid["name"]
