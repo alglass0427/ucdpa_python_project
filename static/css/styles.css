@@ -71,12 +71,12 @@ body {
     margin-bottom: 20px;
 }
 
-.container {
+/* .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .jumbotron {
     background-color: #e9ecef;
@@ -86,4 +86,24 @@ body {
 
 .flash {
     margin-top: 20px;
+}
+
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10%
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 10px;
 }

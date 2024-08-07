@@ -10,7 +10,7 @@ import functions.functions as func    ###Functions file in functions folder to s
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
 USER_DIRECTORY =  'user_directory.json'
-
+app.config['USER_DIRECTORY'] = USER_DIRECTORY
 
 ###Main App below
 
@@ -46,7 +46,7 @@ def signup():
         username = request.form['name']
         email = request.form['email']
         #does the email exist in get user details using the user directory global file location
-        user_details = func.get_user_details(USER_DIRECTORY, email)
+        user_details = func.get_user_details(app.config['USER_DIRECTORY'], email)
         print(f"Details for {email}: {user_details}")
         #if the user does not exist then add to the JSON of users
         if user_details == "User does not exist.":
@@ -58,7 +58,7 @@ def signup():
                 nested_dict[item] = request.form[item]
 
             print(nested_dict)
-            func.add_user_to_json(USER_DIRECTORY,nested_dict)
+            func.add_user_to_json(app.config['USER_DIRECTORY'],nested_dict)
             return redirect(url_for('login'))
         else:
             flash("Email address already used -  Please Login", "warning")
@@ -72,7 +72,7 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        is_valid = func.check_credentials(USER_DIRECTORY, email, password)
+        is_valid = func.check_credentials(app.config['USER_DIRECTORY'], email, password)
         
         print(f"is valid returns {is_valid} and it is {type(is_valid)}")
         # is_valid.pop("password")
@@ -106,16 +106,16 @@ def logout():
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/lesson/<lesson_id>')
+@app.route('/portfolio/<portfolio_id>')
 @login_required
-def lesson(lesson_id):
+def portfolio(portfolio_id):
     # Dummy lesson content
-    lessons = {
-        "1": "Lesson 1 content goes here.",
-        "2": "Lesson 2 content goes here.",
-        "3": "Lesson 3 content goes here."
+    portfolios = {
+        "1": "Portfolio 1 content goes here.",
+        "2": "Portfolio 2 content goes here.",
+        "3": "Portfolio 3 content goes here."
     }
-    return render_template('lesson.html', lesson_content=lessons.get(lesson_id, "Lesson not found."))
+    return render_template('portfolio.html', portfolio_content=portfolios.get(portfolio_id, "Portfolio not found."))
 
 
 @app.errorhandler(404)

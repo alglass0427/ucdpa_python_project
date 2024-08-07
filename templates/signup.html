@@ -2,56 +2,89 @@
 {% block title %}Sign Up - Coding for Kids{% endblock %}
 {% block content %}
 <h1>Sign Up</h1>
-<form id = "signupForm" method="post" action="{{ url_for('signup') }}">
 
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" >
-        <label for="name">Full Name</label>
-        <small></small>
+
+    <div class="container">
+        
+        <form id = "validate"  action="{{ url_for('validator') }}">
+            <div class="row">
+                <div class="col-8 col-sm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" placeholder="User Name" name="username" >
+                        <label for="username">User Name</label>
+                        <small></small>
+                    </div>
+                </div>
+            
+                <div class="col-4 col-sm">
+                    <button class = "btn-primary" type="submit">Validate</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="dob" name="dob">
-        <label for="dob">Date of Birth</label>
-        <small></small>
-    </div>
-
-    <div class="form-floating mb-3">
+    <div class="container">
+        <form id = "signupForm" method="post" action="{{ url_for('signup') }}"></form>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" >
+                    <label for="name">Full Name</label>
+                    <small></small>
+                </div>
+            </div>
+        
+            <div class="col-sm">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="dob" name="dob">
+                    <label for="dob">Date of Birth</label>
+                    <small></small>
+                </div>
+            </div>
+        
+    
+    <!-- <div class="form-floating mb-3">
         <input type="text" class="form-control" id="gender" name="gender">
         <label for="gender">Gender</label>
         <small></small>
-    </div>
+    </div> -->
+            <div class="form-floating mb-3 col-sm">
+                <select class="form-floating form-select mb-3" aria-label="Gender-select">
+                    <option selected>Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+        </div>
 
-
-    <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
-        <label for="email">Email address</label>
-        <small></small>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-        <label for="password">Password</label>
-        <small></small>
-    </div>
-
-    <div class="form-floating">
-        <input type="color" class="form-control" id="fav_color" placeholder="Pick a colour!" name="fav_color">
-        <label for="fav_color">Favourite  Colour</label>
-        <small></small>
-    </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                    <label for="email">Email address</label>
+                    <small></small>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                    <label for="password">Password</label>
+                    <small></small>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-floating">
+                    <input type="color" class="form-control" id="fav_color" placeholder="Pick a colour!" name="fav_color">
+                    <label for="fav_color">Favourite  Colour</label>
+                    <small></small>
+                </div>
+            </div>
+        </div>
     <br>
-    <button type="submit">Submit</button>
+    <button type="submit" class = "btn-primary">Submit</button>
 </form>   
-<br>
-<form id = "validate"  action="{{ url_for('validator') }}">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="username" placeholder="User Name" name="username" >
-        <label for="username">User Name</label>
-        <small></small>
-    </div>
-    <button type="submit">Validate</button>
-</form>
+
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/signup.js') }}"></script>

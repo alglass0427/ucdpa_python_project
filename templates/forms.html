@@ -2,7 +2,7 @@
 {% block title %}Sign Up - Coding for Kids{% endblock %}
 {% block content %}
 <h1>Sign Up</h1>
-<form method="post">
+<form method="POST" action="{{ url_for('forms') }}">
     {{ form.hidden_tag() }}
     
     <div class="form-floating mb-3">
@@ -10,23 +10,30 @@
         {{ form.name.label}}
     </div>
 
-    <br>
-
     <div class="form-floating mb-3">
-        {{ form.dob(class="form-control")}}
+        {{ form.dob(class="form-control" ) }}
         {{ form.dob.label}} 
     </div>
 
-    <br>
-
-    <div class="form-check form-check-inline">
-      
-        {{form.gender}} 
-        {{ form.gender.label}}
-
+    
+    <div class="container">
+        {{form.gender.label}}
+    <div class="radio-group">
+        
+        {% for subfield in form.gender %}
+            <label class="radio-label">
+                {{ subfield }}
+                {{ subfield.label.text }}
+            </label>
+        {% endfor %}
     </div>
+    </div>
+    <!-- <div class="container">
+        {{form.gender.label}}
+        {{form.gender (class="form-check form-check-inline ")}} 
+    </div> -->
 
-    <br>
+    
 
     <div class="form-floating mb-3">
         {{ form.email(class="form-control") }}
@@ -34,18 +41,21 @@
     
     </div>
 
-    <br>
+    
 
     <div class="form-floating mb-3">
         {{ form.password(class="form-control") }}
         {{ form.password.label}} 
     </div>
-
-    <br>
+    
+    <div class="form-floating mb-3">
+        {{ form.fav_color}}
+        
+    </div>
 
     <div class="form-floating mb-3">
-    {{ form.submit.label}} 
-    {{ form.submit (class="form-control btn btn-primary ") }}
+    <!-- {{ form.submit.label}}  -->
+        {{ form.submit (class="btn btn-primary ") }}
     </div>
 
 </form>
