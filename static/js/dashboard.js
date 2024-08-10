@@ -26,3 +26,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+// const jsonFilePath  = "static/json/tickers.json"
+// Populate Dropdown for Demo Purpose
+        document.addEventListener('DOMContentLoaded', function () {
+            // Path to your JSON file
+            const jsonFilePath  = "static/json/tickers";
+        //    \static\json\tickers
+            // Fetch the JSON file
+            fetch(jsonFilePath)
+                .then(response => response.json())
+                .then(data => populateDropdown(data))
+                .catch(error => console.error('Error loading JSON:', error));
+            
+            function populateDropdown(stocks) {
+                console.log(stocks)
+                const dropdown = document.getElementById('stockDropdown');
+        
+                // Iterate over the stocks and create an option element for each
+                stocks.forEach(stock => {
+                    console.log(stock)
+                    const option = document.createElement('option');
+                    option.value = stock.ticker; // Ticker as value
+                    option.text = `${stock.ticker}`; // Display name with ticker
+        
+                    dropdown.appendChild(option); // Add option to dropdown
+                });
+            }
+        });
+        

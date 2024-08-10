@@ -199,7 +199,7 @@ def add_stock():
         print(f"Outside For  - {yf_flag}")
         stock_func.save_user_portfolio(username, user_data)
     
-    return redirect(url_for('dashboard_1',yf_flag = yf_flag))
+    return redirect(url_for('dashboard_1',yf_flag = 'off'))
 
 @app.route('/remove_stock/<string:stock_code>')
 def remove_stock(stock_code):

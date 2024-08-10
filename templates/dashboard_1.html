@@ -2,33 +2,37 @@
 {% block title %}Dashboard - Portfolio Manager{% endblock %}
 {% block content %}
 <h1>Portfolio Dashboard</h1>
-<p>Welcome, {{ session.username }}</p>
-<div>
-    <div class="form-check form-switch">
-        <label class="form-check-label ml-5" for="yahooFinance">
-            <input class="form-check-input" type="checkbox" id="yahooFinance" name="yahooFinance">
-            Y!
-        </label>                
+<div class="container-sm container_add mt-4">
+<div class="row g-3 align-items-center">
+    <div class="col-lg-8 col-md-6">
+        <p>Welcome, {{ session.username }}</p>
+    </div>
+    <div class="col-lg-2 col-md-6">
+        <div class="form-check form-switch">
+            <label class="form-check-label ml-5" for="yahooFinance">
+                <input class="form-check-input" type="checkbox" id="yahooFinance" name="yahooFinance">
+                Y!
+            </label>                
+        </div>
+
+    </div>
+    <div class="col-lg-2 col-md-6">    
+        <a href="{{ url_for('dashboard_1', yf_flag='on') }}" class="btn btn-primary btn-sm">
+        Refresh Prices!
+        </a>
     </div>
 </div>
-<div>
-     <!-- <div class =  "container-sm container_add" >
-            <form action="{{ url_for('add_stock') }}" method="POST">
-                <input type="text" name="stock_code" placeholder="Enter Stock Code" required>
-                <input type="text" name="buy_price" placeholder="Enter Buy Price" required>
-                <input type="text" name="no_of_shares" placeholder="Number of Shares" required>
-                <button type="submit">Add Stock</button>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="yahooFinance">
-                    <label class="form-check-label" for="yahooFinance">Y!</label>
-                </div>
-            </form>
-    </div> -->
+
+</div>
 
     <div class="container-sm container_add mt-4">
         <form action="{{ url_for('add_stock') }}" method="POST" class="row g-3 align-items-center" id = "addStockForm">
             <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="stock_code" placeholder="Stock Code" required>
+                <!-- <input type="text" class="form-control" name="stock_code" placeholder="Stock Code" required> -->
+                <select id="stockDropdown" class="form-control" name="stock_code">
+                    <option value=""></option> <!-- Default option -->
+                </select>
+            
             </div>
             <div class="col-lg-2 col-md-6">
                 <input type="text" class="form-control" name="buy_price" placeholder="Buy Price" required>
