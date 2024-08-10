@@ -2,15 +2,15 @@
 /////////////////////////////////////////////////
 
 
-const usernameEl = document.querySelector('#name');
+const usernameEl = document.querySelector('#fullname');
 const emailEl = document.querySelector('#email');
 const passwordEl = document.querySelector('#password');
 // const confirmPasswordEl = document.querySelector('#confirm-password');
-const form_1 = document.querySelector('#signupForm');
+const form_1 = document.querySelector('#signUpForm');
 
 form_1.addEventListener('input', function (e) {
     switch (e.target.id) {
-        case 'name':
+        case 'fullname':
             checkUsername();
             break;
         case 'email':

@@ -1,5 +1,10 @@
 import json
+import os
+import yfinance as yf
 
+PERSISTENT_DIR = '/persistent'
+USER_DATA_FOLDER = os.path.join(PERSISTENT_DIR, 'users')
+ACCOUNTS_FILE = os.path.join(PERSISTENT_DIR, 'accounts', 'accounts.json')
 
 # Function to write JSON data to a file
 def write_json_file(file_path, data):

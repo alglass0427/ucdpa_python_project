@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Sign Up - Coding for Kids{% endblock %}
 {% block content %}
-<h1>Sign Up</h1>
+<!-- <h1>Sign Up</h1> -->
+
+<div class="row container flex-md-wrap flex-row m-0">
+    <div class="col-6">
+        <h1>Join the Club!</h1>
+    </div>
+    <div class="col-6 flex-wrap  flex-row justify-content-around">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#validate-section" aria-expanded="false" aria-controls="validate-section">Check Email</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#signup-section" aria-expanded="false" aria-controls="signup-section">Sign Up Form</button>
+    </div>
+</div>
+    
 
 
-    <div class="container">
+    <div class="container" id="validate-section">
         
         <form id = "validate"  action="{{ url_for('validator') }}">
             <div class="row">
@@ -23,13 +34,13 @@
         </form>
     </div>
 
-    <div class="container">
-        <form id = "signupForm" method="post" action="{{ url_for('signup') }}"></form>
+    <div class="container" id="signup-section">
+        <form id = "signUpForm" method="post" action="{{ url_for('signup') }}">        
         <div class="row">
             <div class="col-sm">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="name" placeholder="Full Name" name="name" >
-                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="Full Name" name="fullname" >
+                    <label for="fullname">Full Name</label>
                     <small></small>
                 </div>
             </div>
@@ -48,8 +59,8 @@
         <label for="gender">Gender</label>
         <small></small>
     </div> -->
-            <div class="form-floating mb-3 col-sm">
-                <select class="form-floating form-select mb-3" aria-label="Gender-select">
+            <div class="form-floating mb-3 col-sm text-center">
+                <select class=" form-select mb-3 text-center" aria-label="Gender-select" name = "gender">
                     <option selected>Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -83,9 +94,11 @@
         </div>
     <br>
     <button type="submit" class = "btn-primary">Submit</button>
+
 </form>   
 
 {% endblock %}
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
 {% endblock scripts %}
