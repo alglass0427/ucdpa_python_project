@@ -10,21 +10,24 @@ ACCOUNTS_FILE = os.path.join(PERSISTENT_DIR, 'accounts', 'accounts.json')
 
 
 # Function to get stock price using Yahoo Finance API
-def get_stock_price(stock_code):
-    # try:
-    #     stock = yf.Ticker(stock_code)
-    #     print(f"{stock.isin}")
-    #     stock_info = stock.history(period="1d")  # Get the latest day of trading data
-    #     print(f"{stock_info} :  Is the data")
-    #     if not stock_info.empty:
-    #         print(f"Returned to dashboard : {stock_code},{round(stock_info['Close'].iloc[-1], 2)},{stock.isin}")
-    #         return (stock_code,round(stock_info['Close'].iloc[-1], 2),stock.isin)  # Get the last closing price
-    #     else:
-    #         return "Invalid Ticker"
-    # except Exception as e:
-    #     return "Error: " + str(e)
-# Test Response
-    return ("DIS",85.45,"US2546871060")
+def get_stock_price(stock_code,yf_flag):
+    # print(yf_flag)
+    if yf_flag == 'on':
+        try:
+            stock = yf.Ticker(stock_code)
+            print(f"{stock.isin}")
+            stock_info = stock.history(period="1d")  # Get the latest day of trading data
+            print(f"{stock_info} :  Is the data")
+            if not stock_info.empty:
+                print(f"Returned to dashboard : {stock_code},{round(stock_info['Close'].iloc[-1], 2)},{stock.isin}")
+                return (stock_code,round(stock_info['Close'].iloc[-1], 2),stock.isin)  # Get the last closing price
+            else:
+                return (("Invalid Ticker","",""))
+        except Exception as e:
+            return "Error: " + str(e)
+    # Test Response
+    else:
+        return ("","","")
 # def get_all_prices ():
 #     stocks_with_prices = [(stock, get_stock_price(stock)) for stock in user_data['portfolio']]
 

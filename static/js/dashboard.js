@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("Inside the Function")
     // Ensure that the form and checkbox exist before adding the event listener
     const addStockForm = document.getElementById('addStockForm');
     const yahooFinanceToggle = document.getElementById('yahooFinance');
-
+    console.log(addStockForm)
     if (addStockForm && yahooFinanceToggle) {
         addStockForm.addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the default form submission

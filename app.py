@@ -135,12 +135,14 @@ def logout():
 # def dashboard():
 #     return render_template('dashboard.html')
 
-@app.route('/dashboard_1')
+@app.route('/dashboard_1',methods=['GET', 'POST'])
 @login_required
 def dashboard_1():
+    yf_flag = request.args.get('yf_flag', 'off')  # 'off' is the default value
+    flash("Yahoo! Finance is off! - No latest prices displayed", "info")
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+    print(f"Inside Dashboard Yahoo flag  - {yf_flag}")
     username = session['username']
     email = session['email']
     user_data = stock_func.load_user_portfolio(email)
@@ -152,7 +154,8 @@ def dashboard_1():
     #Seperate this to get the response in one API Call
     # stocks_with_prices = [(stock, "") for stock in user_data['portfolio']]
     # stock_func.get_stock_price(stock)
-    stocks_with_prices = [(stock,user_data,stock_func.get_stock_price(stock)) for stock in user_data]
+
+    stocks_with_prices = [(stock,user_data,stock_func.get_stock_price(stock,yf_flag)) for stock in user_data]
     print(f"This is the Stock data passed to the Dashboard ::::: {stocks_with_prices} ")
 
     return render_template('dashboard_1.html', username=username, stocks=stocks_with_prices)
@@ -165,7 +168,7 @@ def add_stock():
     print("INSIDE ADD STOCK")
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+    yf_flag = 'off'
     username = session['email']
     stock_code = request.form['stock_code'].upper()
     buy_price = request.form['buy_price']
@@ -177,16 +180,26 @@ def add_stock():
     if stock_code and stock_code not in user_data:
         stock_add_details =  {}
         # stock_add = {}
-        for key, value in request.form.items():            
-            stock_add_details[key] = value
-            print(stock_add_details)
-            user_data[stock_code] = stock_add_details
+        for key, value in request.form.items():
+            if key != 'yahooFinance':             
+                stock_add_details[key] = value
+                # print(f"-----------------")
+                # print(f"Details To Add in /add Stock  - {stock_add_details}")
+                # print(f"-----------------")
+                user_data[stock_code] = stock_add_details
+            else:
+                yf_flag = value
+                print(f"Inside For  - {yf_flag}")
             # print(f"Stock Add:{stock_add}")
             #Stock Add:{'B': {'stock_code': 'b', 'buy_price': 'b', 'no_of_shares': 'b'}}
         # user_data['portfolio'].append(stock_code)
+        print(f"-----------------")
+        print(f"Details To Add in /add Stock  - {user_data[stock_code]}")
+        print(f"-----------------")
+        print(f"Outside For  - {yf_flag}")
         stock_func.save_user_portfolio(username, user_data)
     
-    return redirect(url_for('dashboard_1'))
+    return redirect(url_for('dashboard_1',yf_flag = yf_flag))
 
 @app.route('/remove_stock/<string:stock_code>')
 def remove_stock(stock_code):

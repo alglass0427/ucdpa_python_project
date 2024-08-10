@@ -7,10 +7,10 @@
     <div class="col-6">
         <h1>Join the Club!</h1>
     </div>
-    <div class="col-6 flex-wrap  flex-row justify-content-around">
+    <!-- <div class="col-6 flex-wrap  flex-row justify-content-around">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#validate-section" aria-expanded="false" aria-controls="validate-section">Check Email</button>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#signup-section" aria-expanded="false" aria-controls="signup-section">Sign Up Form</button>
-    </div>
+    </div> -->
 </div>
     
 
@@ -36,7 +36,8 @@
 
     <div class="container" id="signup-section">
         <form id = "signUpForm" method="post" action="{{ url_for('signup') }}">        
-        <div class="row">
+<!-- Row 1 -->
+            <div class="row">
             <div class="col-sm">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="fullname" placeholder="Full Name" name="fullname" >
@@ -52,13 +53,7 @@
                     <small></small>
                 </div>
             </div>
-        
-    
-    <!-- <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="gender" name="gender">
-        <label for="gender">Gender</label>
-        <small></small>
-    </div> -->
+
             <div class="form-floating mb-3 col-sm text-center">
                 <select class=" form-select mb-3 text-center" aria-label="Gender-select" name = "gender">
                     <option selected>Gender</option>
@@ -68,7 +63,7 @@
                 </select>
             </div>
         </div>
-
+<!-- Row 2 -->
         <div class="row">
             <div class="col-sm">
                 <div class="form-floating mb-3">

@@ -26,7 +26,7 @@
     </div> -->
 
     <div class="container-sm container_add mt-4">
-        <form action="{{ url_for('add_stock') }}" method="POST" class="row g-3 align-items-center">
+        <form action="{{ url_for('add_stock') }}" method="POST" class="row g-3 align-items-center" id = "addStockForm">
             <div class="col-lg-2 col-md-6">
                 <input type="text" class="form-control" name="stock_code" placeholder="Stock Code" required>
             </div>
@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" name="buy_price" placeholder="Buy Price" required>
             </div>
             <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="no_of_shares" placeholder="Voulume" required>
+                <input type="text" class="form-control" name="no_of_shares" placeholder="Volume" required>
             </div>
 
             <div class="col-lg-2 col-md-6">
@@ -58,12 +58,27 @@
         <div class="card mb-2 d-md-none">
             <div class="card-body">
                 <h5 class="card-title">{{ stock }}</h5>
-                <p class="card-text"><strong>Buy Price:</strong> {{ userdata[stock]["buy_price"] }}</p>
-                <p class="card-text"><strong>Volume:</strong> {{ userdata[stock]["no_of_shares"] }}</p>
-                <p class="card-text"><strong>Another Col:</strong> </p>
-                <p class="card-text"><strong>Price:</strong> {{ data[1] }}</p>
-                <p class="card-text"><strong>ISIN:</strong> {{ data[2] }}</p>
-                <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="btn btn-danger">Remove</a>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="card-text"><strong>Buy Price:</strong> {{ userdata[stock]["buy_price"] }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text"><strong>Volume:</strong> {{ userdata[stock]["no_of_shares"] }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text"><strong>Price:</strong> {{ data[1] }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text"><strong>ISIN:</strong> {{ data[2] }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text"><strong>Another Input 1:</strong> {{ userdata[stock]["another_input1"] }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text"><strong>Another Input 1:</strong> {{ userdata[stock]["another_input2"]}}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="btn btn-danger mt-2">Remove</a>
             </div>
         </div>
         {% endfor %}
@@ -77,6 +92,8 @@
                         <th>Volume</th>
                         <th>Price</th>
                         <th>ISIN</th>
+                        <th>Add Input 1</th>
+                        <th>Add Input 2</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -89,6 +106,8 @@
                         <td>{{ userdata[stock]["no_of_shares"] }}</td>
                         <td>{{ data[1] }}</td>
                         <td>{{ data[2] }}</td>
+                        <td>{{ userdata[stock]["another_input1"] }}</td>
+                        <td>{{ userdata[stock]["another_input2"]  }}</td>
                         <td>
                             <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="text-danger">Remove</a>
                         </td>
@@ -103,4 +122,5 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 {% endblock scripts %}
