@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             isValid = false;
                         }
                         break;
-                    case 'stopLoss':
+                    case 'stop_loss':
                         if (input.value === '' || isNaN(input.value) || input.value <= 0) {
                             showError(input, 'Please enter a stop loss price.');
                             isValid = false;
                         }
                         break;
-                    case 'cashOut':
+                    case 'cash_out':
                         if (input.value === '' || isNaN(input.value) || input.value <= 0) {
                             showError(input, 'Please enter a profit price');
                             isValid = false;
