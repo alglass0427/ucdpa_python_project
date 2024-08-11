@@ -76,16 +76,17 @@ def signup():
         # password = request.form['password']
         accounts = stock_func.load_user_accounts()
         
-        user_details =  {}
+        if email in accounts:
+            flash(f"{email} is already registered -  Please Log In!", 'warning')
+            return redirect(url_for('login'))
         
+        user_details =  {}
         for key, value in request.form.items():            
             user_details[key] = value
             print(user_details)
  
         
-        if email in accounts:
-            flash('Username already exists', 'warning')
-            return redirect(url_for('signup'))
+
         
         accounts[email] = user_details
         # accounts[username] = username
@@ -96,7 +97,7 @@ def signup():
         session['username'] = username
         session['email'] = email
         
-        return redirect(url_for('login'))
+        return redirect(url_for('dashboard_1'))
         #if the user does not exist then add to the JSON of users
      
     return render_template('signup.html')
@@ -138,8 +139,9 @@ def logout():
 @app.route('/dashboard_1',methods=['GET', 'POST'])
 @login_required
 def dashboard_1():
+    print("")
     yf_flag = request.args.get('yf_flag', 'off')  # 'off' is the default value
-    flash("Yahoo! Finance is off! - No latest prices displayed", "info")
+    
     if 'username' not in session:
         return redirect(url_for('login'))
     print(f"Inside Dashboard Yahoo flag  - {yf_flag}")
@@ -168,7 +170,7 @@ def add_stock():
     print("INSIDE ADD STOCK")
     if 'username' not in session:
         return redirect(url_for('login'))
-    yf_flag = 'off'
+    # yf_flag = 'off'
     username = session['email']
     stock_code = request.form['stock_code'].upper()
     buy_price = request.form['buy_price']
@@ -197,9 +199,11 @@ def add_stock():
         print(f"Details To Add in /add Stock  - {user_data[stock_code]}")
         print(f"-----------------")
         print(f"Outside For  - {yf_flag}")
+        if yf_flag == 'off':
+            flash("Yahoo! Finance is off! - No latest prices displayed", "info")
         stock_func.save_user_portfolio(username, user_data)
     
-    return redirect(url_for('dashboard_1',yf_flag = 'off'))
+    return redirect(url_for('dashboard_1',yf_flag = yf_flag))
 
 @app.route('/remove_stock/<string:stock_code>')
 def remove_stock(stock_code):
@@ -217,16 +221,16 @@ def remove_stock(stock_code):
 
 
 
-@app.route('/portfolio/<portfolio_id>')
-@login_required
-def portfolio(portfolio_id):
-    # Dummy lesson content
-    portfolios = {
-        "1": "Portfolio 1 content goes here.",
-        "2": "Portfolio 2 content goes here.",
-        "3": "Portfolio 3 content goes here."
-    }
-    return render_template('portfolio.html', portfolio_content=portfolios.get(portfolio_id, "Portfolio not found."))
+# @app.route('/portfolio/<portfolio_id>')
+# @login_required
+# def portfolio(portfolio_id):
+#     # Dummy lesson content
+#     portfolios = {
+#         "1": "Portfolio 1 content goes here.",
+#         "2": "Portfolio 2 content goes here.",
+#         "3": "Portfolio 3 content goes here."
+#     }
+#     return render_template('portfolio.html', portfolio_content=portfolios.get(portfolio_id, "Portfolio not found."))
 
 # new Redirect For 404 Error 
 @app.errorhandler(404)
@@ -263,4 +267,4 @@ def validator():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

@@ -1,56 +1,65 @@
 {% extends "base.html" %}
 {% block title %}Dashboard - Portfolio Manager{% endblock %}
 {% block content %}
-<h1>Portfolio Dashboard</h1>
+<h1 class="h3 h2-sm h1-md d-flex d-block justify-content-center align-items-center">Portfolio Dashboard</h1>
 <div class="container-sm container_add mt-4">
-<div class="row g-3 align-items-center">
-    <div class="col-lg-8 col-md-6">
-        <p>Welcome, {{ session.username }}</p>
-    </div>
-    <div class="col-lg-2 col-md-6">
-        <div class="form-check form-switch">
-            <label class="form-check-label ml-5" for="yahooFinance">
-                <input class="form-check-input" type="checkbox" id="yahooFinance" name="yahooFinance">
-                Y!
-            </label>                
+        <div class="row g-3 align-items-center">
+            <div class="col-md-8 col-xs-12 d-flex d-md-block justify-content-center align-items-center">
+                <span>Welcome, {{ session.username }}</span>
+            </div>
+            <div class="col-md-2 col-xs-12 d-flex d-md-block justify-content-center align-items-center">
+                <div class="form-check form-switch">
+                    <label class="form-check-label ml-5" for="yahooFinance">
+                        <input class="form-check-input" type="checkbox" id="yahooFinance" name="yahooFinance">
+                        Y!
+                    </label>                
+                </div>
+
+            </div>
+            <div class="col-md-2 col-xs-12 d-flex d-md-block justify-content-center align-items-center">    
+                <a href="{{ url_for('dashboard_1', yf_flag='on') }}" class="btn btn-primary btn-sm">
+                Refresh Prices!
+                </a>
+            </div>
         </div>
 
-    </div>
-    <div class="col-lg-2 col-md-6">    
-        <a href="{{ url_for('dashboard_1', yf_flag='on') }}" class="btn btn-primary btn-sm">
-        Refresh Prices!
-        </a>
-    </div>
 </div>
 
-</div>
+    <div class="container container_add mt-4">
+        <form action="{{ url_for('add_stock') }}" method="POST" id = "addStockForm">
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-lg-6 col-md-6">
+                    <!-- <input type="text" class="form-control" name="stock_code" placeholder="Stock Code" required> -->
+                    <select title="stock" id="stockDropdown" class="form-control" name="stock_code">
+                        <option></option> <!-- Default option -->
+                    </select>                
+                </div>
 
-    <div class="container-sm container_add mt-4">
-        <form action="{{ url_for('add_stock') }}" method="POST" class="row g-3 align-items-center" id = "addStockForm">
-            <div class="col-lg-2 col-md-6">
-                <!-- <input type="text" class="form-control" name="stock_code" placeholder="Stock Code" required> -->
-                <select id="stockDropdown" class="form-control" name="stock_code">
-                    <option value=""></option> <!-- Default option -->
-                </select>
-            
-            </div>
-            <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="buy_price" placeholder="Buy Price" required>
-            </div>
-            <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="no_of_shares" placeholder="Volume" required>
-            </div>
+                <div class="col-lg-3 col-md-3">
+                    <input type="text" class="form-control" name="buy_price" placeholder="Buy Price" required>
+                </div>
 
-            <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="another_input1" placeholder="Input" required>
-            </div>
-
-            <div class="col-lg-2 col-md-6">
-                <input type="text" class="form-control" name="another_input2" placeholder="Input" required>
+                <div class="col-lg-3 col-md-3">
+                    <input type="text" class="form-control" name="no_of_shares" placeholder="Volume" required>
+                </div>
             </div>
             
-            <div class="col-lg-2 col-md-12">
-                <button type="submit" class="btn btn-primary w-100">Add Stock</button>
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-3 col-md-4">
+                    <input type="text" class="form-control" name="stop_loss" placeholder="Stop Loss" required>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <input type="text" class="form-control" name="cash_out" placeholder="Take Profit" required>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <input type="text" class="form-control" name="comment" placeholder="Comment" required>
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <button type="submit" class="btn btn-primary w-100">Add Stock</button>
+                </div>
             </div>
         </form>
         
@@ -61,29 +70,100 @@
         {% for stock, userdata, data in stocks %}
         <div class="card mb-2 d-md-none">
             <div class="card-body">
-                <h5 class="card-title">{{ stock }}</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="card-text"><strong>Buy Price:</strong> {{ userdata[stock]["buy_price"] }}</p>
+                <div class="row border rounded mb-2">
+                    <div class="col-12">
+                        <h5 class="card-title text-center border-bottom border-2">{{ stock }}</h5>
                     </div>
-                    <div class="col-6">
+                </div>          
+                <div class="row border rounded">
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>Buy Price:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text"> {{ userdata[stock]["buy_price"] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>Volume:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text"> {{ userdata[stock]["no_of_shares"] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>Latest Px:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text"> {{ data[1] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>ISIN:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text"> {{ data[2] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>Stop Loss Px:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text">  {{ userdata[stock]["stop_loss"] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-bottom">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="card-text pl-2"><strong>Profit Px:</strong></div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card-text">  {{ userdata[stock]["cash_out"] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-12">
                         <p class="card-text"><strong>Volume:</strong> {{ userdata[stock]["no_of_shares"] }}</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="card-text"><strong>Price:</strong> {{ data[1] }}</p>
-                    </div>
-                    <div class="col-6">
+                    </div> -->
+                    <!-- <div class="col-12">
+                        <p class="card-text"><strong>Latest Px:</strong> {{ data[1] }}</p>
+                    </div> -->
+                    <!-- <div class="col-12">
                         <p class="card-text"><strong>ISIN:</strong> {{ data[2] }}</p>
-                    </div>
-                    <div class="col-6">
+                    </div> -->
+                    <!-- <div class="col-12">
                         <p class="card-text"><strong>Another Input 1:</strong> {{ userdata[stock]["another_input1"] }}</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="card-text"><strong>Another Input 1:</strong> {{ userdata[stock]["another_input2"]}}</p>
+                    </div> -->
+                    <!-- <div class="col-12">
+                        <p class="card-text"><strong>Another Input 2:</strong> {{ userdata[stock]["another_input2"]}}</p>
+                    </div> -->
+                
+                    <div class = "text-center mb-2">
+                        <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="btn btn-danger mt-2 btn-sm">Remove</a>
                     </div>
                 </div>
-                <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="btn btn-danger mt-2">Remove</a>
-            </div>
+            </div>    
+
         </div>
         {% endfor %}
         <div class="d-none d-md-block">
@@ -96,8 +176,8 @@
                         <th>Volume</th>
                         <th>Price</th>
                         <th>ISIN</th>
-                        <th>Add Input 1</th>
-                        <th>Add Input 2</th>
+                        <th>Stop Loss Px</th>
+                        <th>Profit Px</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -110,8 +190,8 @@
                         <td>{{ userdata[stock]["no_of_shares"] }}</td>
                         <td>{{ data[1] }}</td>
                         <td>{{ data[2] }}</td>
-                        <td>{{ userdata[stock]["another_input1"] }}</td>
-                        <td>{{ userdata[stock]["another_input2"]  }}</td>
+                        <td>{{ userdata[stock]["stop_loss"] }}</td>
+                        <td>{{ userdata[stock]["cash_out"]  }}</td>
                         <td>
                             <a href="{{ url_for('remove_stock', stock_code=stock) }}" class="text-danger">Remove</a>
                         </td>

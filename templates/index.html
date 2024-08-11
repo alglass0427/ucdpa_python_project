@@ -6,14 +6,26 @@
     <h2 class="display-6">Welcome to your Equity Portfolio, {{ session.username}}</h2>
     <p class="lead">Learn coding through fun and interactive lessons!</p>
     <hr class="my-4">  
-    <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard_1') }}" role="button">Lets Get Started</a>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('logout') }}" role="button">Change User</a>
-    {% else %}
-    <h2 class="display-6">Start and Equity Portfolio!!</h2>
+    <div class="row g-3 align-items-center">
+        <div class="col-lg-6 col-md-6">
+            <a class="btn btn-primary w-100" href="{{ url_for('dashboard_1') }}" role="button">Lets Get Started</a>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <a class="btn btn-primary w-100" href="{{ url_for('logout') }}" role="button">Change User</a>
+        </div>
+    </div>
+            {% else %}
+    <h2 class="display-6">Start an Equity Portfolio!!</h2>
     <p>Get started by creating an account and logging in.</p>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('signup') }}" role="button">Sign Up</a>
-
+    <hr class="my-4"> 
+    <div class="row g-3 align-items-center">
+        <div class="col-lg-6 col-md-6">
+            <a class="btn btn-primary w-100" href="{{ url_for('login') }}" role="button">Login</a>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <a class="btn btn-primary w-100" href="{{ url_for('signup') }}" role="button">Sign Up</a>
+        </div>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

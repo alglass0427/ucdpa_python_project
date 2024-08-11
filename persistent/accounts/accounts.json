@@ -1,1 +1,10 @@
-{"alwglass@gmail.com": {"fullname": "Alan Glass", "dob": "1986-06-27", "gender": "Male", "email": "alwglass@gmail.com", "password": "Holly#040115", "fav_color": "#f41010"}, "harper@gmail.com": {"fullname": "Harper", "dob": "2022-11-01", "gender": "Male", "email": "harper@gmail.com", "password": "Holly#040115", "fav_color": "#ec1313"}}
+{
+    "alwglass@gmail.com": {
+        "fullname": "Alan Glass",
+        "dob": "1986-06-27",
+        "gender": "Male",
+        "email": "alwglass@gmail.com",
+        "password": "Holly#040115",
+        "fav_color": "#f41010"
+    }
+}

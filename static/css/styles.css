@@ -33,7 +33,7 @@ nav ul li a {
     padding: 2em;
     background-color: #fff;
     margin: 2em auto;
-    max-width: 1000px;
+    max-width: 1400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -107,3 +107,22 @@ body {
 .radio-label input[type="radio"] {
     margin-right: 10px;
 }
+
+
+
+/* ----- */
+
+.success input {
+    border-color: green;
+}
+
+.error{
+    border-color: red;
+ 
+}
+
+
+.error small {
+    color: red;
+}
+
