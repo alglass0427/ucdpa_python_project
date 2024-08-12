@@ -4,23 +4,21 @@ import functions.functions as func    ###Functions file in functions folder to s
 import functions.stock_functions as stock_func    ###Functions file in functions folder to seperate functions from app.py
 import os
 import json
+# from dotenv import load_dotenv
 # import yfinance as yf
 
+# load_dotenv()  # Load environment variables from .env
 
-# import json  #imported in the functions file
-# from flask_wtf import FlaskForm
-# from wtforms import StringField,SubmitField,PasswordField,DateField,RadioField
-# from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
-app.secret_key = 'mysecretkey'
+# app.secret_key = 'mysecretkey'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 CURRENT_DIR =  os.getcwd()
-USER_DIRECTORY =  'user_directory.json'
 PERSISTENT_DIR =  os.path.join(CURRENT_DIR, 'persistent')
 USER_DATA_FOLDER = os.path.join(PERSISTENT_DIR, 'users')
 ACCOUNTS_FILE = os.path.join(PERSISTENT_DIR, 'accounts', 'accounts.json')
-app.config['USER_DIRECTORY'] = USER_DIRECTORY
+
 
 
 # Ensure directories exist
