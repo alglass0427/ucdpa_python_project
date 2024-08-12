@@ -2,4 +2,4 @@
 /venv
 /ignore
 # __pycache__/
-.env  # Added to ignore the .env file
+.env
