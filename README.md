@@ -77,25 +77,40 @@ Created a Web Service:
 
 
 Application Structure
+
 app.py: The main Flask application file containing route definitions.
+
 templates/: HTML templates for rendering web pages.
+
 static/: Static files such as CSS, JavaScript, and images.
+
 requirements.txt: A list of all dependencies needed to run the application.
+
 .env: Environment variables for configuration (should be created manually). Included in Zip file for local
+
 Key Routes
 /: Home page or landing page.
+
 /login: User login page.
+
 /dashboard_1: User's portfolio dashboard.
+
 /add_stock: Add a new stock to the portfolio (POST only).
+
 /remove_stock/<string:stock_code>: Remove a stock from the portfolio.
 
 
 Points to Note
 The application defaults to using 'off' for yf_flag if not provided. 
+
 This toggle is controlled tith the Y! switch on the Dashboard(e.g., when adding stocks).
+
 If this is set To ON the Application Will refresh all prices in the Portfolio when a new Stock is added
+
 Alternatively you can leave it  off  , Add All stocks  -  And use the Refresh Prices Button
+
 I note that storing the user data , passwords and portfolio information should be stored in database and not locally on json
+
 This will be future functionality in SQL module.
 
 ![alt text](yahoo_image.png)
