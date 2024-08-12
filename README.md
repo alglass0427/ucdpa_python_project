@@ -61,19 +61,34 @@ flask run
 
 Open your browser and go to http://127.0.0.1:5000 to access the application.
 
+Deployed on Render
+
+Created a Web Service:
+    Connect Your GitHub Repository:   github.com/alglass0427/ucdpa_python_project
+    Configure the Service:
+
+    Runtime: Select Python.
+    Build Command: Leave it as default (pip install -r requirements.txt).
+    Branch: main
+    Start Command: gunicorn app:app
+
+    Click Create Web Service. Render will start the deployment process.
+    The service will build your application, install dependencies, and start Gunicorn
+
+
 Application Structure
 app.py: The main Flask application file containing route definitions.
 templates/: HTML templates for rendering web pages.
 static/: Static files such as CSS, JavaScript, and images.
 requirements.txt: A list of all dependencies needed to run the application.
-.env: Environment variables for configuration (should be created manually). Included in Zip file
+.env: Environment variables for configuration (should be created manually). Included in Zip file for local
 Key Routes
 /: Home page or landing page.
 /login: User login page.
 /dashboard_1: User's portfolio dashboard.
 /add_stock: Add a new stock to the portfolio (POST only).
 /remove_stock/<string:stock_code>: Remove a stock from the portfolio.
-Debugging
+
 
 Points to Note
 The application defaults to using 'off' for yf_flag if not provided. 
@@ -82,8 +97,6 @@ If this is set To ON the Application Will refresh all prices in the Portfolio wh
 Alternatively you can leave it  off  , Add All stocks  -  And use the Refresh Prices Button
 I note that storing the user data , passwords and portfolio information should be stored in database and not locally on json
 This will be future functionality in SQL module.
-
-
 
 ![alt text](yahoo_image.png)
 
