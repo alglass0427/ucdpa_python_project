@@ -253,7 +253,7 @@ def validator():
         upper_letter = any(c.isupper() for c in username)
         num_end =  username[-1].isdigit()
 
-        report = lower_letter and upper_letter and num_end and not username
+        report = lower_letter and upper_letter and num_end and user_exists
 
     return render_template('validator.html', report = report , lower = lower_letter , upper = upper_letter, num_end = num_end, user_exists = user_exists)
     # except TypeError:
@@ -264,4 +264,4 @@ def validator():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
