@@ -66,12 +66,12 @@ Deployed on Render
 Created a Web Service:
     Connect Your GitHub Repository:   github.com/alglass0427/ucdpa_python_project
     Configure the Service:
+    
     ENVIRON VARIABLES : SECRET_KEY (retrieved using os.environ)
     Runtime: Select Python.
     Build Command: Leave it as default (pip install -r requirements.txt).
     Branch: main
     Start Command: gunicorn app:app
-
     Click Create Web Service. Render will start the deployment process.
     The service will build your application, install dependencies, and start Gunicorn
 
