@@ -10,28 +10,28 @@
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#validate-section" aria-expanded="false" aria-controls="validate-section">Check Email</button>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#signup-section" aria-expanded="false" aria-controls="signup-section">Sign Up Form</button>
     </div>
-</div>
+</div> -->
     
+<!-- Validate if User exists and Some practive validations -->
 
-
-    <div class="container" id="validate-section">
+<div class="container-sm container_add mt-4" id="validate-section">
         
         <form id = "validate"  action="{{ url_for('validator') }}">
-            <div class="row">
-                <div class="col-8 col-sm">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-8 col-md-6">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" placeholder="User Name" name="username" >
-                        <label for="username">User Name</label>
+                        <label for="username">Email</label>
                         <small></small>
                     </div>
                 </div>
             
-                <div class="col-4 col-sm">
-                    <button class = "btn-primary" type="submit">Validate</button>
+                <div class="col-lg-4  col-md-6 mt-0  align-items-center ">
+                    <button class = "btn btn-primary w-100 " type="submit">Validate</button>
                 </div>
             </div>
         </form>
-    </div> -->
+</div>
 
 <div class="container-sm container_add mt-4" id="signup-section">
     <form id = "signUpForm" method="POST" autocomplete="off" action="{{ url_for('signup') }}">        

@@ -131,10 +131,6 @@ def logout():
     flash("You have been logged out", "info")
     return redirect(url_for('index'))
 
-# @app.route('/dashboard')
-# @login_required
-# def dashboard():
-#     return render_template('dashboard.html')
 
 @app.route('/dashboard_1',methods=['GET', 'POST'])
 @login_required
@@ -220,18 +216,6 @@ def remove_stock(stock_code):
     return redirect(url_for('dashboard_1'))
 
 
-
-# @app.route('/portfolio/<portfolio_id>')
-# @login_required
-# def portfolio(portfolio_id):
-#     # Dummy lesson content
-#     portfolios = {
-#         "1": "Portfolio 1 content goes here.",
-#         "2": "Portfolio 2 content goes here.",
-#         "3": "Portfolio 3 content goes here."
-#     }
-#     return render_template('portfolio.html', portfolio_content=portfolios.get(portfolio_id, "Portfolio not found."))
-
 # new Redirect For 404 Error 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -245,20 +229,33 @@ def validator():
     upper_letter = False
     num_end = False
     report = False
+    user_exists = False
+
+        # password = request.form['password']
+    accounts = stock_func.load_user_accounts()
+        
+
+
     # try:
     username = request.args.get("username")
     print(username)
+    
+        
+        
+
     if username != "":
-        lower_letter = any(c.islower() for c in username) 
+        lower_letter = any(c.islower() for c in username)
+        if username in accounts:
+            user_exists = True 
         ##short hand for looping through user name
         # for letter in username:
         #     if letter.lower() == letter:
         upper_letter = any(c.isupper() for c in username)
         num_end =  username[-1].isdigit()
 
-        report = lower_letter and upper_letter and num_end
+        report = lower_letter and upper_letter and num_end and not username
 
-    return render_template('validator.html', report = report , lower = lower_letter , upper = upper_letter, num_end = num_end)
+    return render_template('validator.html', report = report , lower = lower_letter , upper = upper_letter, num_end = num_end, user_exists = user_exists)
     # except TypeError:
     #     print("No Users Exist!!!")
 
@@ -267,4 +264,4 @@ def validator():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
