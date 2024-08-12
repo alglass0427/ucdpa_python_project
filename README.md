@@ -66,7 +66,7 @@ Deployed on Render
 Created a Web Service:
     Connect Your GitHub Repository:   github.com/alglass0427/ucdpa_python_project
     Configure the Service:
-
+    ENVIRON VARIABLES : SECRET_KEY (retrieved using os.environ)
     Runtime: Select Python.
     Build Command: Leave it as default (pip install -r requirements.txt).
     Branch: main
