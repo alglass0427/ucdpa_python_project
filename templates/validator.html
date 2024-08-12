@@ -2,39 +2,42 @@
 {% block title %}Home - Coding for Kids{% endblock %}
 {% block content %}
 <div class="jumbotron">
-    <h2 class="display-6">Lets check the user name conditions!</h2>    
+    <h2 class="display-6">Some info about the input value!</h2>    
         {% if report %}
-        <p class="lead">Your email doesn not exist , username had uppercase, lowercase and number at the end , Well Done!!</p>
+        <p class="lead">Your email is already Registered , username had uppercase, lowercase and number at the end , Well Done!!</p>
         {% else %}
         <ul>
 
-            {% if user_exists %}
-            <h5>Practice Validation - Does the Username Exist?</h5>
-                <li>This email is already registered!!!</li>
-            {% endif %}
-
             {% if not user_exists %}
-            <h5>Practice Validation - Does the Username Exist?</h5>
-                <li>This email is <em>NOT </em> registered!!!</li>
+                <li>This email is NOT registered!!!</li>
             {% endif %}
-
 
             {% if not upper %}
-            <h5>Practice Validation - Does Username contain an Uppercase Letter?</h5>
                 <li>You did not use an <em>upper</em> case letter!</li>
             {% endif %}
 
-
-
             {% if not lower %}
-            <h5>Practive Validation - Does Username contain an Lower Letter?</h5>
                 <li>You did not use an <em>lower</em> case letter!</li>
             {% endif %}
 
             {% if not num_end %}
-            <h5>Practive Validation - Does Username contain a number at the end?</h5>
-
                 <li>You did not use a <em>number</em> at the end!</li>
+            {% endif %}
+
+            {% if user_exists %}
+            <li>This email is registered!!!</li>
+            {% endif %}
+
+            {% if upper %}
+                <li>You did use an <em>upper</em> case letter!</li>
+            {% endif %}
+
+            {% if lower %}
+                <li>You did use an <em>lower</em> case letter!</li>
+            {% endif %}
+
+            {% if num_end %}
+                <li>You did use a <em>number</em> at the end!</li>
             {% endif %}
 
             

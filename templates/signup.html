@@ -3,20 +3,25 @@
 {% block content %}
 <!-- <h1>Sign Up</h1> -->
 
-<!-- <div class="row container flex-md-wrap flex-row m-0"> -->
-    <h1 class="h3 h2-sm h1-md d-flex d-block justify-content-center align-items-center">Register</h1>
 
-    <!-- <div class="col-6 flex-wrap  flex-row justify-content-around">
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#validate-section" aria-expanded="false" aria-controls="validate-section">Check Email</button>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#signup-section" aria-expanded="false" aria-controls="signup-section">Sign Up Form</button>
+<div class="container-sm container_add mt-4">
+
+    <div class="row g-3 align-items-center">
+        <div class="col-md-6">
+            <button class="btn btn-primary w-100 " type="button" data-toggle="collapse" data-target="#validate-section" aria-expanded="false" aria-controls="validate-section">Check if already Registered!</button>
+        </div>    
+        <div class="col-md-6">
+            <button class="btn btn-primary w-100 " type="button" data-toggle="collapse" data-target="#signup-section" aria-expanded="false" aria-controls="signup-section">Sign Up Form</button>
+        </div>
     </div>
-</div> -->
+</div>
     
 <!-- Validate if User exists and Some practive validations -->
 
-<div class="container-sm container_add mt-4" id="validate-section">
+<div class="container-sm container_add mt-4 collapse" id="validate-section">
         
         <form id = "validate"  action="{{ url_for('validator') }}">
+            
             <div class="row g-3 align-items-center">
                 <div class="col-lg-8 col-md-6">
                     <div class="form-floating mb-3">
@@ -27,13 +32,14 @@
                 </div>
             
                 <div class="col-lg-4  col-md-6 mt-0  align-items-center ">
-                    <button class = "btn btn-primary w-100 " type="submit">Validate</button>
+                    <button class = "btn btn-primary w-100" type="submit">Validate</button>
                 </div>
             </div>
         </form>
 </div>
 
-<div class="container-sm container_add mt-4" id="signup-section">
+<div class="container-sm container_add mt-4 collapse" id="signup-section">
+    <h1 class="h3 h2-sm h1-md d-flex d-block justify-content-center align-items-center">Register</h1>
     <form id = "signUpForm" method="POST" autocomplete="off" action="{{ url_for('signup') }}">        
 <!-- Row 1 -->
         <div class="row g-3 align-items-center">
